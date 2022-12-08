@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <img src="https://lh3.googleusercontent.com/a/AEdFTp4Mwsq5NhbUUglag0P23B_VCs-CiEOMhoOKidAC=s512-c" id="img" alt="">
+    <script>
+        let jsNewFeatures = () => {
+            document.querySelectorAll('*').forEach(el => {
+                el.props = (prop, value) => {
+                    if (value) el.style[prop] = value;
+                    return window.getComputedStyle(el).getPropertyValue(prop);
+                }
+            });
+        };
+
+        window.onload = () => {
+            jsNewFeatures();
+            img.props('width', 200);
+        }
+    </script>
+</body>
+
+</html>

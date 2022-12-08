@@ -1,0 +1,82 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            width: 800px;
+            height: 200px;
+            overflow: hidden;
+            margin: auto;
+        }
+
+        .container .carousel {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            width: fit-content;
+        }
+
+        .container .carousel .el {
+            background-color: brown;
+            width: 150px;
+            height: 200px;
+            color: white;
+            display: grid;
+            place-items: center;
+            user-select: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <section class="container">
+        <div class="carousel" id="carousel">
+        </div>
+    </section>
+    <script>
+        //append element to carousel
+        for (let i = 1; i <= 20; i++) {
+            carousel.innerHTML += `<div class="el">${i}</div>`;
+        }
+        //define variables
+        let direction = "", oldx = 0, move = true, position = 0, speed = 8;
+        //check a mouse move direction
+        function checkDirection(e) {
+            if (e.pageX < oldx) direction = "left"
+            else if (e.pageX > oldx) direction = "right"
+            oldx = e.pageX;
+        }
+        //when mouse down on carousel
+        carousel.onmousedown = function (e) {
+            move = true;
+            //when mouse move above carousel
+            this.onmousemove = function (e) {
+                if (move) {
+                    checkDirection(e);
+                    //if mouse direction is left
+                    if (direction == 'left' && position < (this.clientWidth - carousel.parentElement.clientWidth)) {
+                        position += speed
+                        this.style.marginLeft = -position + 'px'
+                    }
+                    //if mouse direction is right
+                    else if (direction == 'right' && position > 0) {
+                        position -= speed;
+                        this.style.marginLeft = -position + 'px'
+                    }
+                }
+            }
+        }
+        //if your finger leave the mouse button, the carousel will stop move
+        carousel.onmouseup = function () {
+            move = false;
+        }
+
+    </script>
+</body>
+</html>
