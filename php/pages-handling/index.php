@@ -16,4 +16,5 @@ function index()
     echo view(page: 'index', fields: ['title' => $title , 'heading' => $heading]);
 }
 
-index();
+// you can call function like this way index() or 'index'() think about that;
+'index'();
